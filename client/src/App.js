@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-import SavedList from './Movies/SavedList';
+import { Route, Link, Switch } from "react-router-dom";
+import MovieList from "./Movies/MovieList";
+import Movie from "./Movies/Movie";
+import SavedList from "./Movies/SavedList";
 
 const App = () => {
   const [savedList, setSavedList] = useState([]);
@@ -28,12 +30,14 @@ const App = () => {
   return (
     <div>
       <SavedList list={savedList} />
-      <Route path="/movies/:id">
-        <Movie addToSavedList={addToSavedList} />
-      </Route>
-      <Route path="/">
-        <MovieList movies={movieList} />
-      </Route>
+      <Switch>
+        <Route path="/movies/:id">
+          <Movie addToSavedList={addToSavedList} />
+        </Route>
+        <Route path="/">
+          <MovieList movies={movieList} />
+        </Route>
+      </Switch>
     </div>
   );
 };
